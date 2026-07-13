@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Midnight Atelier Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>" />
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-main">Midnight Atelier</span>
+      <span class="brand-sub">Greater Noida</span>
+      <span class="brand-badge">Admin Panel</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" id="nav-rooms">
+        <span class="nav-icon">🛏️</span>
+        Rooms
+      </a>
+      <a href="/" class="nav-item" target="_blank">
+        <span class="nav-icon">🌐</span>
+        View Website
+      </a>
+      <a href="https://wa.me/918800105244" class="nav-item" target="_blank">
+        <span class="nav-icon">💬</span>
+        WhatsApp
+      </a>
+      <a href="https://www.instagram.com/midnightatelier.gn" class="nav-item" target="_blank">
+        <span class="nav-icon">📸</span>
+        Instagram
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-item" id="logout-btn" style="color:var(--red);">
+        <span class="nav-icon">🚪</span>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════ MAIN AREA ═══════════════════ -->
+  <main class="main-area">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-title">Rooms Management</div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <span class="user-dot"></span>
+          <span>admin</span>
+        </div>
+        <button class="btn btn-gold" onclick="openAddModal()" id="add-room-btn">
+          + Add Room
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon">🛏️</div>
+          <div class="stat-info">
+            <span class="stat-num" id="stat-total">—</span>
+            <span class="stat-lbl">Total Rooms</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-info">
+            <span class="stat-num" id="stat-available">—</span>
+            <span class="stat-lbl">Available</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🚫</div>
+          <div class="stat-info">
+            <span class="stat-num" id="stat-unavailable">—</span>
+            <span class="stat-lbl">Unavailable</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📱</div>
+          <div class="stat-info">
+            <span class="stat-num">WA</span>
+            <span class="stat-lbl">Bookings via WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rooms Table Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">All Rooms</span>
+        </div>
+        <div class="table-wrap">
+          <table id="rooms-table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Room Name</th>
+                <th>Price/Night</th>
+                <th>Amenities</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="rooms-table-body">
+              <tr>
+                <td colspan="6" style="text-align:center;padding:40px;color:var(--muted);">
+                  <span class="spinner" style="display:inline-block;margin:0 auto;"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════ ADD / EDIT ROOM MODAL ═══════════════════ -->
+<div class="modal-overlay" id="room-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Add New Room</span>
+      <button class="modal-close" onclick="closeModal('room-modal')" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <form id="room-form" autocomplete="off">
+        <div class="form-grid">
+
+          <!-- Name -->
+          <div class="form-group full">
+            <label for="room-name">Room Name *</label>
+            <input type="text" id="room-name" placeholder="e.g. The Midnight Suite" required />
+          </div>
+
+          <!-- Description -->
+          <div class="form-group full">
+            <label for="room-desc">Description</label>
+            <textarea id="room-desc" placeholder="Describe the room vibe, features, and what makes it special..."></textarea>
+          </div>
+
+          <!-- Price -->
+          <div class="form-group">
+            <label for="room-price">Price per Night (₹)</label>
+            <input type="number" id="room-price" placeholder="e.g. 2999" min="0" step="1" />
+          </div>
+
+          <!-- Availability -->
+          <div class="form-group">
+            <label for="room-available">Availability</label>
+            <select id="room-available">
+              <option value="1">✅ Available</option>
+              <option value="0">🚫 Unavailable</option>
+            </select>
+          </div>
+
+          <!-- Amenities -->
+          <div class="form-group full">
+            <label for="room-amenities">Amenities</label>
+            <input
+              type="text"
+              id="room-amenities"
+              placeholder="e.g. AC, WiFi, Jacuzzi, Projector, Smart TV (comma-separated)"
+            />
+          </div>
+
+          <!-- Images -->
+          <div class="form-group full">
+            <label>Room Images</label>
+
+            <!-- Tab Toggle -->
+            <div class="img-input-tabs">
+              <button type="button" class="img-tab active" data-tab="url">🔗 Add by URL</button>
+              <button type="button" class="img-tab" data-tab="upload">📁 Upload File</button>
+            </div>
+
+            <!-- URL pane -->
+            <div class="img-pane active" data-pane="url">
+              <div style="display:flex;gap:10px;align-items:flex-end;">
+                <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+                  <label for="room-img-url" style="margin:0;">Image URL</label>
+                  <input type="url" id="room-img-url" placeholder="https://example.com/room-photo.jpg" />
+                </div>
+                <button type="button" class="btn btn-outline" id="add-url-btn" style="flex-shrink:0;white-space:nowrap;">
+                  + Add URL
+                </button>
+              </div>
+            </div>
+
+            <!-- Upload pane -->
+            <div class="img-pane" data-pane="upload">
+              <div class="upload-drop-zone">
+                <input type="file" id="file-input" accept="image/*" multiple />
+                <span class="dz-icon">📸</span>
+                <div class="dz-text">Click to select or drag & drop images</div>
+                <div class="dz-sub">JPG, PNG, WebP, GIF supported</div>
+              </div>
+            </div>
+
+            <!-- Preview list -->
+            <div class="img-preview-list" id="img-preview-list">
+              <p style="color:var(--muted);font-size:0.8rem;">No images added yet</p>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('room-modal')">Cancel</button>
+      <button class="btn btn-gold" id="save-room-btn">💾 Save Room</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CONFIRM DELETE MODAL ════════════════════ -->
+<div class="modal-overlay" id="confirm-modal" role="alertdialog" aria-modal="true">
+  <div class="modal confirm-dialog">
+    <div class="modal-header">
+      <span class="modal-title">Confirm Delete</span>
+      <button class="modal-close" onclick="closeModal('confirm-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--muted);line-height:1.7;">
+        Are you sure you want to delete the room
+        <strong style="color:var(--cream)" id="confirm-room-name"></strong>?
+        This action cannot be undone.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">Cancel</button>
+      <button class="btn btn-danger" id="confirm-delete-btn">🗑️ Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>

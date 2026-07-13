@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — Midnight Atelier</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>" />
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <span class="l-main">Midnight Atelier</span>
+      <span class="l-sub">Greater Noida</span>
+      <span class="l-badge">🔐 Admin Panel</span>
+    </div>
+
+    <h1 class="login-title">Welcome back</h1>
+    <p class="login-sub">Sign in to manage your rooms and listings.</p>
+
+    <div id="login-error" class="login-error" role="alert"></div>
+
+    <form class="login-form" id="login-form" autocomplete="on">
+      <div class="form-group-login">
+        <label for="username">Username</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            autocomplete="username"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group-login">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-login" id="login-btn">
+        🔐 Sign In
+      </button>
+    </form>
+
+    <p style="text-align:center;margin-top:24px;font-size:0.75rem;color:var(--muted);">
+      <a href="/" style="color:var(--gold);text-decoration:none;">← Back to Website</a>
+    </p>
+  </div>
+</div>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>

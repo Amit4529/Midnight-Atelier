@@ -4,20 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Midnight Atelier — Premium Stay in Greater Noida</title>
-  <meta name="description" content="Midnight Atelier offers luxury rooms in Greater Noida with jacuzzis, cinema projectors, and bespoke interiors. Premium stay, smart price. Book via WhatsApp." />
-  <meta name="keywords" content="luxury rooms Greater Noida, Midnight Atelier, premium stay Noida, short stay Noida, boutique rooms Noida" />
+  <meta name="description" content="Midnight Atelier offers luxury short-stay rooms in Greater Noida with private jacuzzis, cinema projectors, and bespoke interiors. Premium stay, smart price." />
   <meta property="og:title" content="Midnight Atelier — Premium Stay. Smart Price." />
   <meta property="og:description" content="Luxury rooms in Greater Noida. Jacuzzis, projectors, bespoke interiors." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=20260911" />
 </head>
 <body>
 
-<!-- ══════════════════════ NAVBAR ══════════════════════════════════ -->
+<!-- ═══════════════════ NAVBAR ═══════════════════════════════════════ -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">
+    <a href="#hero" class="nav-logo" id="nav-logo-link">
       <span class="nm">Midnight Atelier</span>
       <span class="ns">Greater Noida</span>
     </a>
@@ -25,13 +24,12 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#rooms">Rooms</a></li>
-      <li><a href="#amenities">Amenities</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#location">Location</a></li>
       <li>
-        <a href="https://wa.me/918800105244?text=Hi%20Midnight%20Atelier!%20I%27d%20like%20to%20enquire%20about%20a%20stay."
-           target="_blank" rel="noopener" class="btn btn-primary">
-          Book Now
+        <a href="https://wa.me/918800105244?text=Hi%20Midnight%20Atelier!%20I%27d%20like%20to%20reserve%20a%20room."
+           target="_blank" rel="noopener" class="nav-reserve" id="nav-reserve-btn">
+          Reserve Now
         </a>
       </li>
     </ul>
@@ -42,79 +40,132 @@
   </div>
 </nav>
 
-<!-- ══════════════════════ HERO ════════════════════════════════════ -->
+<!-- ═══════════════════ HERO ═════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-backdrop"></div>
-  <div class="hero-lines"></div>
 
-  <div class="hero-content">
+  <!-- SPLIT: left dark | right photo -->
+  <div class="hero-body">
+
+    <!-- LEFT — solid dark bg, all text lives here -->
     <div class="hero-left">
-      <div class="hero-tag">
-        <span class="dot"></span>
-        Now Available · Greater Noida
-      </div>
+      <div class="hero-text-wrap">
 
-      <h1 class="hero-h1">
-        Midnight<br /><em>Atelier</em>
-      </h1>
+        <h1 class="hero-h1">Midnight <em>Atelier</em></h1>
+        <span class="hero-loc">Greater Noida</span>
 
-      <div class="hero-divider">
-        <div class="hero-divider-line"></div>
-        <span class="hero-divider-text">Premium Stay · Smart Price</span>
-        <div class="hero-divider-line"></div>
-      </div>
+        <h2 class="hero-h2">Curated Stays, Greater Noida</h2>
+        <p class="hero-p">
+          Escape to a meticulously designed experience of tailored
+          luxury. Explore rooms with jacuzzis, cinema projectors, and
+          bespoke interiors, all at a smart price in the heart of
+          Greater Noida.
+        </p>
 
-      <p class="hero-desc">
-        Luxury vibes that won't break the bank. Meticulously designed rooms
-        with jacuzzis, cinema projectors, and bespoke interiors — in the
-        heart of Greater Noida.
-      </p>
+        <div class="hero-ctas">
+          <a href="#rooms" class="btn-text-link" id="hero-explore-btn">
+            View Our Ateliers
+            <span class="arr">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+          <a href="https://wa.me/918800105244?text=Hi!%20I%27d%20like%20to%20know%20more."
+             target="_blank" rel="noopener" class="btn-chat" id="hero-chat-btn">
+            Let's Chat
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+        </div>
 
-      <div class="hero-actions">
-        <a href="#rooms" class="btn btn-primary" id="hero-explore-btn">Explore Rooms</a>
-        <a href="https://wa.me/918800105244?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20Midnight%20Atelier." target="_blank" rel="noopener" class="btn btn-ghost" id="hero-wa-btn">WhatsApp Us</a>
       </div>
     </div>
 
+    <!-- RIGHT — luxury room photo -->
     <div class="hero-right">
-      <div class="hero-stat-card">
-        <span class="hsc-num">4+</span>
-        <div class="hsc-info">
-          <span class="hsc-label">Luxury Rooms</span>
-          <span class="hsc-sub">Curated spaces</span>
+      <img
+        src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1400&auto=format&fit=crop&q=85"
+        alt="Midnight Atelier luxury suite interior"
+        loading="eager"
+        id="hero-img"
+      />
+
+      <!-- Floating map widget -->
+      <a href="https://maps.google.com/?q=Omaxe+ITC+Greater+Noida"
+         target="_blank" rel="noopener" class="hero-map" id="hero-map-btn" aria-label="View on map">
+        <div class="map-thumb">
+          <iframe
+            title="Location map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.6978!2d77.4265!3d28.4737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc1a5e5555555%3A0x0!2sOmaxe+ITC%2C+Greater+Noida!5e0!3m2!1sen!2sin!4v1700000000000"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div class="map-label">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Midnight Atelier · Greater Noida
+        </div>
+      </a>
+    </div>
+
+  </div><!-- /.hero-body -->
+
+  <!-- STATS BAR — sits flush at bottom -->
+  <div class="hero-stats">
+    <div class="stats-inner">
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        </div>
+        <div>
+          <span class="stat-name">Luxury Rooms</span>
+          <span class="stat-sub">Curated spaces</span>
+          <span class="stat-val">4+ Distinct Ateliers</span>
         </div>
       </div>
-      <div class="hero-stat-card">
-        <span class="hsc-num">5★</span>
-        <div class="hsc-info">
-          <span class="hsc-label">Experience</span>
-          <span class="hsc-sub">Every stay</span>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <span class="stat-name">Experience</span>
+          <span class="stat-sub">Every stay</span>
+          <span class="stat-val">5★ Rated</span>
         </div>
       </div>
-      <div class="hero-stat-card">
-        <span class="hsc-num">24/7</span>
-        <div class="hsc-info">
-          <span class="hsc-label">Support</span>
-          <span class="hsc-sub">Via WhatsApp</span>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="stat-name">Support</span>
+          <span class="stat-sub">Via WhatsApp</span>
+          <span class="stat-val">24/7 Availability</span>
         </div>
       </div>
-      <div class="hero-stat-card">
-        <span class="hsc-num">₹1.8k</span>
-        <div class="hsc-info">
-          <span class="hsc-label">Starting From</span>
-          <span class="hsc-sub">Per night</span>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div>
+          <span class="stat-name">Starting From</span>
+          <span class="stat-sub">Per night</span>
+          <span class="stat-val">₹1.8k</span>
         </div>
       </div>
+
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span class="hero-scroll-label">Scroll</span>
+  <!-- Scroll indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span class="scroll-txt">Scroll</span>
   </div>
+
 </section>
 
-<!-- ══════════════════════ ABOUT ═══════════════════════════════════ -->
+<!-- ═══════════════════ ABOUT ════════════════════════════════════════ -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
@@ -122,15 +173,15 @@
       <div class="about-img-wrap reveal">
         <div class="about-img-frame">
           <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&auto=format&fit=crop&q=80"
-               alt="Midnight Atelier luxury suite interior" loading="lazy" />
+               alt="Luxury suite interior" loading="lazy" />
         </div>
         <div class="about-float-tag">
-          <span class="float-tag-num">100%</span>
-          <span class="float-tag-label">Luxury Experience</span>
+          <div class="float-num">100%</div>
+          <div class="float-lbl">Luxury Assured</div>
         </div>
       </div>
 
-      <div class="about-text reveal reveal-delay-1">
+      <div class="reveal reveal-d1">
         <span class="eyebrow">Our Story</span>
         <h2 class="section-title">Where Luxury Meets Affordability</h2>
         <div class="hairline"></div>
@@ -142,43 +193,33 @@
 
         <ul class="about-list">
           <li>
-            <span class="check">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
+            <span class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
             Cinematic projector setups for an immersive movie experience
           </li>
           <li>
-            <span class="check">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
+            <span class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
             Private jacuzzi suites crafted for deep relaxation
           </li>
           <li>
-            <span class="check">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
+            <span class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
             Dark, moody interiors designed by expert stylists
           </li>
           <li>
-            <span class="check">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
+            <span class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
             Premium linen, hotel-grade toiletries, mood lighting
           </li>
           <li>
-            <span class="check">
-              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
+            <span class="chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
             24/7 concierge support via WhatsApp
           </li>
         </ul>
 
-        <div class="about-address-box">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8a45e" stroke-width="1.8" stroke-linecap="round" style="flex-shrink:0;margin-top:2px">
+        <div class="addr-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8a45e" stroke-width="1.8" stroke-linecap="round" style="flex-shrink:0;margin-top:2px">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
           <span>
-            <strong style="color:var(--cream-d);font-weight:500;">Omaxe ITC, Near Alpha II Gate No. 8</strong><br />
+            <strong style="color:var(--cream-d);font-weight:500;">Omaxe ITC, Near Alpha II Gate No. 8</strong><br>
             Greater Noida – 201310, Uttar Pradesh
           </span>
         </div>
@@ -188,208 +229,62 @@
   </div>
 </section>
 
-<!-- ══════════════════════ ROOMS ════════════════════════════════════ -->
+<!-- ═══════════════════ ROOMS ════════════════════════════════════════ -->
 <section id="rooms">
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">Our Spaces</span>
       <h2 class="section-title">Curated Luxury Rooms</h2>
       <div class="hairline center"></div>
-      <p class="section-sub">
-        Every room at Midnight Atelier tells a distinct story.
-        Find your perfect escape and reserve instantly via WhatsApp.
-      </p>
+      <p class="section-sub">Every room at Midnight Atelier tells a distinct story. Reserve yours via WhatsApp.</p>
     </div>
-
     <div class="rooms-grid" id="rooms-grid">
-      <!-- Skeletons while loading -->
-      <div class="room-skeleton">
-        <div class="skel-img"></div>
-        <div class="skel-body">
-          <div class="skel-line h"></div>
-          <div class="skel-line"></div>
-          <div class="skel-line s"></div>
-        </div>
-      </div>
-      <div class="room-skeleton">
-        <div class="skel-img"></div>
-        <div class="skel-body">
-          <div class="skel-line h"></div>
-          <div class="skel-line"></div>
-          <div class="skel-line s"></div>
-        </div>
-      </div>
-      <div class="room-skeleton">
-        <div class="skel-img"></div>
-        <div class="skel-body">
-          <div class="skel-line h"></div>
-          <div class="skel-line"></div>
-          <div class="skel-line s"></div>
-        </div>
-      </div>
+      <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line h"></div><div class="skel-line"></div><div class="skel-line s"></div></div></div>
+      <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line h"></div><div class="skel-line"></div><div class="skel-line s"></div></div></div>
+      <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line h"></div><div class="skel-line"></div><div class="skel-line s"></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════ AMENITIES ════════════════════════════════ -->
-<section id="amenities">
-  <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow">What We Offer</span>
-      <h2 class="section-title">Premium Amenities</h2>
-      <div class="hairline center"></div>
-      <p class="section-sub">
-        Every detail carefully chosen to elevate your stay from ordinary to extraordinary.
-      </p>
-    </div>
-
-    <div class="amenities-grid">
-
-      <div class="amenity-card reveal">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 2v4"/><path d="M12 18v4"/></svg>
-        </div>
-        <span class="amenity-name">Private Jacuzzi</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-1">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        </div>
-        <span class="amenity-name">Projector Room</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-2">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/><path d="M17.657 6.343A8 8 0 1 0 6.343 17.657"/><path d="M15.536 8.464A5 5 0 1 0 8.464 15.536"/></svg>
-        </div>
-        <span class="amenity-name">Premium AC</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-3">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
-        </div>
-        <span class="amenity-name">High-Speed WiFi</span>
-      </div>
-
-      <div class="amenity-card reveal">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
-        </div>
-        <span class="amenity-name">Smart TV</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-1">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <span class="amenity-name">Luxury Bedding</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-2">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
-        </div>
-        <span class="amenity-name">Premium Toiletries</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-3">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
-        </div>
-        <span class="amenity-name">Mini Bar</span>
-      </div>
-
-      <div class="amenity-card reveal">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <span class="amenity-name">Digital Lock</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-1">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        </div>
-        <span class="amenity-name">Mood Lighting</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-2">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
-        </div>
-        <span class="amenity-name">Daily Housekeeping</span>
-      </div>
-
-      <div class="amenity-card reveal reveal-delay-3">
-        <div class="amenity-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 15.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <span class="amenity-name">24/7 Support</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ GALLERY ══════════════════════════════════ -->
+<!-- ═══════════════════ GALLERY ══════════════════════════════════════ -->
 <section id="gallery">
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">Visual Journey</span>
       <h2 class="section-title">Photo Gallery</h2>
       <div class="hairline center"></div>
-      <p class="section-sub">
-        A glimpse into the world of Midnight Atelier. Every frame, a story.
-      </p>
+      <p class="section-sub">A glimpse into the world of Midnight Atelier. Every frame, a story.</p>
     </div>
-
-    <div id="gallery-grid">
-      <div class="gallery-empty">
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="gallery-empty-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
+    <div id="gallery-container">
+      <div class="gal-empty">
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════ CTA ══════════════════════════════════════ -->
+<!-- ═══════════════════ CTA ══════════════════════════════════════════ -->
 <section id="cta">
   <div class="container">
     <div class="cta-inner reveal">
       <span class="eyebrow" style="justify-content:center;">Ready to Book?</span>
-      <h2 class="cta-title">Your Luxury Escape Awaits</h2>
-      <p class="cta-sub">Message us on WhatsApp and we'll confirm your booking in minutes.</p>
+      <h2 class="cta-h">Your Luxury Escape Awaits</h2>
+      <p class="cta-p">Message us on WhatsApp and we'll confirm your booking in minutes.</p>
       <a href="https://wa.me/918800105244?text=Hi%20Midnight%20Atelier!%20I%27d%20like%20to%20book%20a%20room."
-         target="_blank" rel="noopener" class="btn btn-wa" id="cta-wa-btn">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.563 5.408L2 22l4.748-1.542C8.116 21.412 9.998 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
-        </svg>
+         target="_blank" rel="noopener" class="btn-wa" id="cta-wa-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.563 5.408L2 22l4.748-1.542C8.116 21.412 9.998 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
         Chat on WhatsApp
       </a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════ LOCATION ═════════════════════════════════ -->
+<!-- ═══════════════════ LOCATION ═════════════════════════════════════ -->
 <section id="location">
   <div class="container">
     <div class="section-head reveal">
@@ -397,121 +292,101 @@
       <h2 class="section-title">Our Location</h2>
       <div class="hairline"></div>
     </div>
+    <div class="loc-grid">
+      <div class="loc-list">
 
-    <div class="location-grid">
-      <div class="location-details">
-
-        <div class="loc-item reveal">
-          <div class="loc-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="loc-text">
+        <div class="loc-row reveal">
+          <div class="loc-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="loc-txt">
             <strong>Address</strong>
-            <span>Omaxe ITC, Near Alpha II Gate No. 8<br />Greater Noida – 201310, UP</span>
+            <span>Omaxe ITC, Near Alpha II Gate No. 8<br>Greater Noida – 201310, UP</span>
           </div>
         </div>
 
-        <div class="loc-item reveal reveal-delay-1">
-          <div class="loc-icon">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 15.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="loc-text">
+        <div class="loc-row reveal reveal-d1">
+          <div class="loc-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 15.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div class="loc-txt">
             <strong>Call / WhatsApp</strong>
-            <span>
-              <a href="tel:+918800105244">+91 88001 05244</a><br />
-              <a href="tel:+918969716944">+91 89697 16944</a>
-            </span>
+            <span><a href="tel:+918800105244">+91 88001 05244</a><br><a href="tel:+918969716944">+91 89697 16944</a></span>
           </div>
         </div>
 
-        <div class="loc-item reveal reveal-delay-2">
-          <div class="loc-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="loc-text">
+        <div class="loc-row reveal reveal-d2">
+          <div class="loc-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="loc-txt">
             <strong>Check-In / Check-Out</strong>
-            <span>Check-in: 12:00 PM · Check-out: 11:00 AM</span>
+            <span>12:00 PM · Check-out: 11:00 AM</span>
           </div>
         </div>
 
-        <div class="loc-item reveal reveal-delay-3">
-          <div class="loc-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </div>
-          <div class="loc-text">
+        <div class="loc-row reveal reveal-d3">
+          <div class="loc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+          <div class="loc-txt">
             <strong>Instagram</strong>
-            <span>
-              <a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener">
-                @midnightatelier.gn
-              </a>
-            </span>
+            <span><a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener">@midnightatelier.gn</a></span>
           </div>
         </div>
 
         <a href="https://wa.me/918800105244?text=Hi!%20I%20need%20directions%20to%20Midnight%20Atelier."
-           target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;margin-top:8px;" id="directions-btn">
+           target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:4px;align-self:flex-start;" id="directions-btn">
           Get Directions
         </a>
       </div>
 
-      <div class="map-wrap reveal reveal-delay-1">
-        <iframe
-          title="Midnight Atelier Location — Omaxe ITC Greater Noida"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.6978!2d77.4265!3d28.4737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc1a5e5555555%3A0x0!2sOmaxe+ITC%2C+Greater+Noida!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;">
+      <div class="map-wrap reveal reveal-d1">
+        <iframe title="Midnight Atelier map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.6978!2d77.4265!3d28.4737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc1a5e5555555%3A0x0!2sOmaxe+ITC%2C+Greater+Noida!5e0!3m2!1sen!2sin!4v1700000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════ FOOTER ════════════════════════════════════ -->
+<!-- ═══════════════════ FOOTER ════════════════════════════════════════ -->
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
+      <div>
         <span class="fb-name">Midnight Atelier</span>
         <span class="fb-sub">Greater Noida</span>
-        <p>Premium short-stay rooms designed for those who believe luxury should be accessible. Your comfort is our art.</p>
+        <p class="fb-p">Premium short-stay rooms designed for those who believe luxury should be accessible. Your comfort is our art.</p>
         <div class="socials">
-          <a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener" class="soc" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="https://wa.me/918800105244" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-            </svg>
+          <a href="https://wa.me/918800105244" target="_blank" rel="noopener" class="soc" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </a>
         </div>
       </div>
 
-      <div class="footer-col">
-        <h5>Navigation</h5>
-        <ul class="footer-links">
+      <div>
+        <div class="fc-h">Navigation</div>
+        <ul class="fc-links">
           <li><a href="#about">About Us</a></li>
           <li><a href="#rooms">Our Rooms</a></li>
-          <li><a href="#amenities">Amenities</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#location">Location</a></li>
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <a href="tel:+918800105244" class="footer-contact-link">
+      <div>
+        <div class="fc-h">Contact</div>
+        <a href="tel:+918800105244" class="fc-contact">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 15.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           +91 88001 05244
         </a>
-        <a href="tel:+918969716944" class="footer-contact-link">
+        <a href="tel:+918969716944" class="fc-contact">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 15.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.9a16 16 0 0 0 6.09 6.09l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           +91 89697 16944
         </a>
-        <a href="https://wa.me/918800105244" target="_blank" rel="noopener" class="footer-contact-link">
+        <a href="https://wa.me/918800105244" target="_blank" rel="noopener" class="fc-contact">
           <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           WhatsApp Us
         </a>
-        <a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener" class="footer-contact-link">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://www.instagram.com/midnightatelier.gn" target="_blank" rel="noopener" class="fc-contact">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           @midnightatelier.gn
         </a>
       </div>
@@ -524,26 +399,74 @@
   </div>
 </footer>
 
-<!-- ══════════════════════ FLOATING WA ══════════════════════════════ -->
-<div class="wa-float">
-  <div class="wa-tooltip">Chat with us!</div>
+<!-- ═══════════════════ FLOATING WA ══════════════════════════════════ -->
+<div class="wa-fab">
+  <div class="wa-tip">Chat with us!</div>
   <a href="https://wa.me/918800105244?text=Hi%20Midnight%20Atelier!%20I%27d%20like%20to%20enquire%20about%20a%20stay."
-     target="_blank" rel="noopener" class="wa-float-btn" id="floating-wa-btn" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-      <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.563 5.408L2 22l4.748-1.542C8.116 21.412 9.998 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
-    </svg>
+     target="_blank" rel="noopener" class="wa-fab-btn" id="floating-wa" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.563 5.408L2 22l4.748-1.542C8.116 21.412 9.998 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
   </a>
+</div>
+
+<!-- ═══════════════════ ROOM DETAIL MODAL ════════════════════════════ -->
+<div class="rd-overlay" id="room-detail-modal" role="dialog" aria-label="Room details" style="display:none;visibility:hidden;">
+  <div class="rd-modal">
+    <button class="rd-close" id="rd-close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="rd-layout">
+      <!-- Left: Images -->
+      <div class="rd-images">
+        <div class="rd-main-wrap">
+          <img class="rd-main-img" src="" alt="" />
+        </div>
+        <div class="rd-thumbs"></div>
+      </div>
+
+      <!-- Right: Info -->
+      <div class="rd-info">
+        <h2 class="rd-name"></h2>
+        <div class="rd-status avail"></div>
+        <p class="rd-desc"></p>
+
+        <div class="rd-section">
+          <span class="rd-label">Amenities</span>
+          <div class="rd-amenities"></div>
+        </div>
+
+        <div class="rd-section">
+          <span class="rd-label">Price</span>
+          <div class="rd-price">
+            <span class="rd-price-val"></span>
+            <span class="rd-price-per">per night</span>
+          </div>
+        </div>
+
+        <div class="rd-actions">
+          <a class="rd-wa-btn" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.989.574 3.842 1.563 5.408L2 22l4.748-1.542C8.116 21.412 9.998 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            Book via WhatsApp
+          </a>
+          <p class="rd-unavail-msg" style="display:none;">This room is currently unavailable for booking. Check back soon or contact us.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
-  <img src="" alt="Room photo" id="lightbox-img" />
-  <button class="lightbox-close" id="lightbox-close" aria-label="Close">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <img src="" alt="" id="lightbox-img" />
+  <button class="lb-close" id="lb-close" aria-label="Close">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
   </button>
 </div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20260911"></script>
 </body>
 </html>

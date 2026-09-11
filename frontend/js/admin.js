@@ -1,11 +1,11 @@
-const API = 'http://localhost:8000/api';
+const API = '/api';
 
 /* ═══════════════════════════════════════════════════════════════════════
    AUTH HELPERS
    ═══════════════════════════════════════════════════════════════════════ */
-function getToken() { return localStorage.getItem('ma_token'); }
-function setToken(t) { localStorage.setItem('ma_token', t); }
-function clearToken() { localStorage.removeItem('ma_token'); }
+function getToken() { return sessionStorage.getItem('ma_token'); }
+function setToken(t) { sessionStorage.setItem('ma_token', t); }
+function clearToken() { sessionStorage.removeItem('ma_token'); }
 
 function authHeaders() {
   return { 'Authorization': `Bearer ${getToken()}`, 'Content-Type': 'application/json' };
@@ -14,6 +14,9 @@ function authHeaders() {
 function requireAuth() {
   if (!getToken()) { window.location.href = '/admin/'; }
 }
+
+// Clean up old localStorage token (migrated to sessionStorage)
+localStorage.removeItem('ma_token');
 
 /* ═══════════════════════════════════════════════════════════════════════
    TOAST
@@ -43,7 +46,6 @@ function showToast(msg, type = 'success') {
    ═══════════════════════════════════════════════════════════════════════ */
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
-  // If already logged in, go to dashboard
   if (getToken()) window.location.href = '/admin/dashboard.html';
 
   loginForm.addEventListener('submit', async (e) => {
@@ -63,19 +65,17 @@ if (loginForm) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.detail || 'Invalid credentials');
       }
-
       const data = await res.json();
       setToken(data.access_token);
       window.location.href = '/admin/dashboard.html';
     } catch (err) {
       errEl.textContent = err.message;
       errEl.style.display = 'block';
-      btn.innerHTML = '🔐 Sign In';
+      btn.textContent = 'Sign In';
       btn.disabled = false;
     }
   });
@@ -98,6 +98,48 @@ if (document.getElementById('rooms-table-body')) {
     window.location.href = '/admin/';
   });
 
+  // ── Section Switching ──────────────────────────────────────────────
+  const sections = ['rooms', 'gallery', 'settings'];
+  const sectionTitles = {
+    rooms: ['Rooms Management', 'Manage your property listings'],
+    gallery: ['Gallery Management', 'Upload and manage photos for the public gallery'],
+    settings: ['Settings', 'Configure your contact information'],
+  };
+
+  sections.forEach(s => {
+    document.getElementById(`nav-${s}`)?.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchSection(s);
+    });
+  });
+
+  function switchSection(section) {
+    // Nav highlighting
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(`nav-${section}`)?.classList.add('active');
+
+    // Show/hide sections
+    sections.forEach(s => {
+      const el = document.getElementById(`${s}-section`);
+      if (el) el.style.display = s === section ? 'block' : 'none';
+    });
+
+    // Update topbar
+    const [title, sub] = sectionTitles[section] || ['Dashboard', ''];
+    const titleEl = document.getElementById('topbar-title');
+    const subEl = document.getElementById('topbar-sub');
+    if (titleEl) titleEl.textContent = title;
+    if (subEl) subEl.textContent = sub;
+
+    // Show/hide add room button
+    const addBtn = document.getElementById('add-room-btn');
+    if (addBtn) addBtn.style.display = section === 'rooms' ? 'inline-flex' : 'none';
+
+    // Load data for section
+    if (section === 'gallery') loadGallery();
+    if (section === 'settings') loadSettings();
+  }
+
   // ── Load Rooms ────────────────────────────────────────────────────
   async function loadRooms() {
     try {
@@ -105,7 +147,7 @@ if (document.getElementById('rooms-table-body')) {
       rooms = await res.json();
       renderStats();
       renderTable();
-    } catch (err) {
+    } catch {
       showToast('Failed to load rooms', 'error');
     }
   }
@@ -122,21 +164,18 @@ if (document.getElementById('rooms-table-body')) {
     const tbody = document.getElementById('rooms-table-body');
     if (rooms.length === 0) {
       tbody.innerHTML = `
-        <tr>
-          <td colspan="6">
-            <div class="empty-state">
-              <span class="empty-icon">🛏️</span>
-              <p>No rooms yet. Add your first room!</p>
-              <button class="btn btn-gold" onclick="openAddModal()">+ Add Room</button>
-            </div>
-          </td>
-        </tr>`;
+        <tr><td colspan="6">
+          <div class="empty-state">
+            <p>No rooms yet. Add your first room!</p>
+            <button class="btn btn-gold" onclick="openAddModal()">+ Add Room</button>
+          </div>
+        </td></tr>`;
       return;
     }
 
     tbody.innerHTML = rooms.map(room => {
       const imgs = (room.images || '').split(',').map(s => s.trim()).filter(Boolean);
-      const firstImg = imgs[0] ? (imgs[0].startsWith('http') ? imgs[0] : `http://localhost:8000${imgs[0]}`) : null;
+      const firstImg = imgs[0] || null;
       const amenities = (room.amenities || '').split(',').slice(0, 3).join(', ');
       const price = room.price_per_night ? `₹${Number(room.price_per_night).toLocaleString('en-IN')}` : '—';
 
@@ -144,24 +183,24 @@ if (document.getElementById('rooms-table-body')) {
         <tr>
           <td>
             ${firstImg
-              ? `<img src="${firstImg}" class="room-thumb" alt="${room.name}" onerror="this.outerHTML='<div class=\\'room-thumb-placeholder\\'>🛏️</div>'">`
-              : `<div class="room-thumb-placeholder">🛏️</div>`}
+              ? `<img src="${firstImg}" class="room-thumb" alt="${room.name}" onerror="this.outerHTML='<div class=\\'room-thumb-placeholder\\'></div>'">`
+              : `<div class="room-thumb-placeholder"></div>`}
           </td>
           <td>
             <strong>${room.name}</strong><br>
-            <small style="color:var(--muted);font-size:0.75rem">${(room.description || '').slice(0, 60)}...</small>
+            <small style="color:var(--muted);font-size:0.72rem">${(room.description || '').slice(0, 55)}...</small>
           </td>
           <td style="color:var(--gold);font-weight:600">${price}</td>
           <td style="color:var(--muted);font-size:0.8rem">${amenities || '—'}</td>
           <td>
             <span class="badge ${room.is_available ? 'badge-avail' : 'badge-unavail'}">
-              ${room.is_available ? '● Available' : '● Unavailable'}
+              ${room.is_available ? 'Available' : 'Unavailable'}
             </span>
           </td>
           <td>
             <div class="action-btns">
-              <button class="btn btn-outline btn-sm" onclick="openEditModal(${room.id})" title="Edit">✏️ Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="confirmDelete(${room.id}, '${room.name.replace(/'/g, "\\'")}')" title="Delete">🗑️</button>
+              <button class="btn btn-outline btn-sm" onclick="openEditModal(${room.id})" title="Edit">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="confirmDelete(${room.id}, '${room.name.replace(/'/g, "\\'")}')" title="Delete">Delete</button>
             </div>
           </td>
         </tr>`;
@@ -169,16 +208,12 @@ if (document.getElementById('rooms-table-body')) {
   }
 
   // ── Modal ─────────────────────────────────────────────────────────
-  const modal = document.getElementById('room-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const roomForm = document.getElementById('room-form');
-
   function openAddModal() {
     editingRoomId = null;
     existingImages = [];
     pendingUploadFiles = [];
-    modalTitle.textContent = 'Add New Room';
-    roomForm.reset();
+    document.getElementById('modal-title').textContent = 'Add New Room';
+    document.getElementById('room-form').reset();
     renderImagePreviews();
     switchImgTab('url');
     openModal('room-modal');
@@ -191,7 +226,7 @@ if (document.getElementById('rooms-table-body')) {
     existingImages = (room.images || '').split(',').map(s => s.trim()).filter(Boolean);
     pendingUploadFiles = [];
 
-    modalTitle.textContent = 'Edit Room';
+    document.getElementById('modal-title').textContent = 'Edit Room';
     document.getElementById('room-name').value = room.name || '';
     document.getElementById('room-desc').value = room.description || '';
     document.getElementById('room-price').value = room.price_per_night || '';
@@ -203,15 +238,9 @@ if (document.getElementById('rooms-table-body')) {
     openModal('room-modal');
   }
 
-  function openModal(id) {
-    document.getElementById(id)?.classList.add('open');
-  }
+  function openModal(id) { document.getElementById(id)?.classList.add('open'); }
+  function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
 
-  function closeModal(id) {
-    document.getElementById(id)?.classList.remove('open');
-  }
-
-  // Close modal on overlay click
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) overlay.classList.remove('open');
@@ -233,7 +262,7 @@ if (document.getElementById('rooms-table-body')) {
     const urlInput = document.getElementById('room-img-url');
     const url = urlInput.value.trim();
     if (!url) return showToast('Please enter an image URL', 'error');
-    if (!url.startsWith('http')) return showToast('Please enter a valid URL (starting with http)', 'error');
+    if (!url.startsWith('http')) return showToast('Please enter a valid URL starting with http', 'error');
     existingImages.push(url);
     urlInput.value = '';
     renderImagePreviews();
@@ -242,10 +271,8 @@ if (document.getElementById('rooms-table-body')) {
 
   // ── File Upload ───────────────────────────────────────────────────
   document.getElementById('file-input')?.addEventListener('change', (e) => {
-    const files = Array.from(e.target.files);
-    files.forEach(f => {
-      if (!f.type.startsWith('image/')) return showToast(`${f.name} is not an image`, 'error');
-      pendingUploadFiles.push(f);
+    Array.from(e.target.files).forEach(f => {
+      if (f.type.startsWith('image/')) pendingUploadFiles.push(f);
     });
     renderImagePreviews();
     e.target.value = '';
@@ -254,31 +281,24 @@ if (document.getElementById('rooms-table-body')) {
   function renderImagePreviews() {
     const container = document.getElementById('img-preview-list');
     if (!container) return;
-
-    const allPreviews = [
-      ...existingImages.map(url => ({ type: 'url', src: url.startsWith('http') ? url : `http://localhost:8000${url}`, val: url })),
-      ...pendingUploadFiles.map(f => ({ type: 'file', src: URL.createObjectURL(f), file: f })),
+    const all = [
+      ...existingImages.map(url => ({ type: 'url', src: url })),
+      ...pendingUploadFiles.map(f => ({ type: 'file', src: URL.createObjectURL(f) })),
     ];
-
-    if (allPreviews.length === 0) {
+    if (!all.length) {
       container.innerHTML = '<p style="color:var(--muted);font-size:0.8rem;">No images added yet</p>';
       return;
     }
-
-    container.innerHTML = allPreviews.map((img, i) => `
+    container.innerHTML = all.map((img, i) => `
       <div class="img-preview-item" data-index="${i}" data-type="${img.type}">
-        <img src="${img.src}" alt="Preview" onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\'/>'">
+        <img src="${img.src}" alt="Preview">
         <button class="remove-img" onclick="removeImage(${i}, '${img.type}')" title="Remove">✕</button>
       </div>`).join('');
   }
 
   function removeImage(index, type) {
-    const urlCount = existingImages.length;
-    if (type === 'url') {
-      existingImages.splice(index, 1);
-    } else {
-      pendingUploadFiles.splice(index - urlCount, 1);
-    }
+    if (type === 'url') existingImages.splice(index, 1);
+    else pendingUploadFiles.splice(index - existingImages.length, 1);
     renderImagePreviews();
   }
 
@@ -302,43 +322,34 @@ if (document.getElementById('rooms-table-body')) {
 
     try {
       let roomId = editingRoomId;
-
       if (editingRoomId) {
         const res = await fetch(`${API}/rooms/${editingRoomId}`, {
-          method: 'PUT',
-          headers: authHeaders(),
-          body: JSON.stringify(payload),
+          method: 'PUT', headers: authHeaders(), body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error((await res.json()).detail || 'Update failed');
       } else {
         const res = await fetch(`${API}/rooms`, {
-          method: 'POST',
-          headers: authHeaders(),
-          body: JSON.stringify(payload),
+          method: 'POST', headers: authHeaders(), body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error((await res.json()).detail || 'Create failed');
-        const newRoom = await res.json();
-        roomId = newRoom.id;
+        roomId = (await res.json()).id;
       }
 
-      // Upload pending files
       for (const file of pendingUploadFiles) {
         const fd = new FormData();
         fd.append('file', file);
         await fetch(`${API}/rooms/${roomId}/upload`, {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${getToken()}` },
-          body: fd,
+          method: 'POST', headers: { 'Authorization': `Bearer ${getToken()}` }, body: fd,
         });
       }
 
-      showToast(editingRoomId ? 'Room updated successfully!' : 'Room added successfully!');
+      showToast(editingRoomId ? 'Room updated!' : 'Room added!');
       closeModal('room-modal');
       await loadRooms();
     } catch (err) {
       showToast(err.message, 'error');
     } finally {
-      btn.innerHTML = '💾 Save Room';
+      btn.textContent = 'Save Room';
       btn.disabled = false;
     }
   });
@@ -357,22 +368,124 @@ if (document.getElementById('rooms-table-body')) {
     const btn = document.getElementById('confirm-delete-btn');
     btn.innerHTML = '<span class="spinner"></span> Deleting...';
     btn.disabled = true;
-
     try {
-      const res = await fetch(`${API}/rooms/${deletingRoomId}`, {
-        method: 'DELETE',
-        headers: authHeaders(),
-      });
+      const res = await fetch(`${API}/rooms/${deletingRoomId}`, { method: 'DELETE', headers: authHeaders() });
       if (!res.ok) throw new Error('Delete failed');
-      showToast('Room deleted successfully');
+      showToast('Room deleted');
       closeModal('confirm-modal');
       await loadRooms();
     } catch (err) {
       showToast(err.message, 'error');
     } finally {
-      btn.innerHTML = '🗑️ Yes, Delete';
+      btn.textContent = 'Yes, Delete';
       btn.disabled = false;
       deletingRoomId = null;
+    }
+  });
+
+  // ══════════════════════════════════════════════════════════════════
+  // GALLERY MANAGEMENT
+  // ══════════════════════════════════════════════════════════════════
+  let galleryImages = [];
+
+  async function loadGallery() {
+    try {
+      const res = await fetch(`${API}/gallery`, { headers: { 'Authorization': `Bearer ${getToken()}` } });
+      galleryImages = await res.json();
+      document.getElementById('stat-gallery').textContent = galleryImages.length;
+      renderGalleryGrid();
+    } catch {
+      showToast('Failed to load gallery', 'error');
+    }
+  }
+
+  function renderGalleryGrid() {
+    const grid = document.getElementById('gallery-grid');
+    if (!grid) return;
+    if (!galleryImages.length) {
+      grid.innerHTML = `<div class="gallery-empty-state"><p>No gallery photos yet</p><span>Upload photos to showcase in the public gallery section</span></div>`;
+      return;
+    }
+    grid.innerHTML = galleryImages.map(img => `
+      <div class="gal-admin-item">
+        <img src="${img.image_url}" alt="${img.caption || ''}" loading="lazy">
+        <div class="gal-admin-overlay">
+          <button class="gal-del-btn" onclick="deleteGalleryImage(${img.id})" title="Delete">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+            </svg>
+          </button>
+        </div>
+        ${img.caption ? `<div class="gal-admin-caption">${img.caption}</div>` : ''}
+      </div>`).join('');
+  }
+
+  document.getElementById('gallery-file-input')?.addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+    for (const file of files) {
+      if (!file.type.startsWith('image/')) { showToast(`${file.name} is not an image`, 'error'); continue; }
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('caption', '');
+      try {
+        const res = await fetch(`${API}/gallery/upload`, {
+          method: 'POST', headers: { 'Authorization': `Bearer ${getToken()}` }, body: fd,
+        });
+        if (!res.ok) throw new Error('Upload failed');
+        showToast(`${file.name} uploaded!`);
+      } catch { showToast(`Failed to upload ${file.name}`, 'error'); }
+    }
+    e.target.value = '';
+    await loadGallery();
+  });
+
+  async function deleteGalleryImage(id) {
+    if (!confirm('Delete this gallery image?')) return;
+    try {
+      const res = await fetch(`${API}/gallery/${id}`, { method: 'DELETE', headers: authHeaders() });
+      if (!res.ok) throw new Error('Delete failed');
+      showToast('Gallery image deleted');
+      await loadGallery();
+    } catch (err) { showToast(err.message, 'error'); }
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  // SETTINGS MANAGEMENT
+  // ══════════════════════════════════════════════════════════════════
+  async function loadSettings() {
+    try {
+      const settings = await fetch(`${API}/settings`).then(r => r.json());
+      document.getElementById('setting-whatsapp').value = settings.whatsapp_number || '';
+      document.getElementById('setting-instagram').value = settings.instagram_handle || '';
+    } catch {
+      showToast('Failed to load settings', 'error');
+    }
+  }
+
+  document.getElementById('save-settings-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('save-settings-btn');
+    const whatsapp = document.getElementById('setting-whatsapp').value.trim();
+    const instagram = document.getElementById('setting-instagram').value.trim();
+
+    if (!whatsapp) return showToast('WhatsApp number is required', 'error');
+
+    btn.innerHTML = '<span class="spinner"></span> Saving...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${API}/settings`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify({ whatsapp_number: whatsapp, instagram_handle: instagram }),
+      });
+      if (!res.ok) throw new Error('Save failed');
+      showToast('Settings saved!');
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      btn.textContent = 'Save Settings';
+      btn.disabled = false;
     }
   });
 
@@ -383,7 +496,11 @@ if (document.getElementById('rooms-table-body')) {
   window.confirmDelete = confirmDelete;
   window.switchImgTab = switchImgTab;
   window.removeImage = removeImage;
+  window.deleteGalleryImage = deleteGalleryImage;
 
   // ── Init ──────────────────────────────────────────────────────────
   loadRooms();
+  fetch(`${API}/gallery`).then(r => r.json()).then(g => {
+    document.getElementById('stat-gallery').textContent = g.length;
+  }).catch(() => {});
 }

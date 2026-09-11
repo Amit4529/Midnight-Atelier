@@ -6,7 +6,7 @@
   <title>Dashboard — Midnight Atelier Admin</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>" />
-  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="../css/admin.css?v=20260911" />
 </head>
 <body>
 
@@ -22,27 +22,25 @@
 
     <nav class="sidebar-nav">
       <a href="#" class="nav-item active" id="nav-rooms">
-        <span class="nav-icon">🛏️</span>
-        Rooms
+        <span>Rooms</span>
       </a>
+      <a href="#" class="nav-item" id="nav-gallery">
+        <span>Photo Gallery</span>
+      </a>
+      <a href="#" class="nav-item" id="nav-settings">
+        <span>Settings</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+
       <a href="/" class="nav-item" target="_blank">
-        <span class="nav-icon">🌐</span>
-        View Website
-      </a>
-      <a href="https://wa.me/918800105244" class="nav-item" target="_blank">
-        <span class="nav-icon">💬</span>
-        WhatsApp
-      </a>
-      <a href="https://www.instagram.com/midnightatelier.gn" class="nav-item" target="_blank">
-        <span class="nav-icon">📸</span>
-        Instagram
+        <span>View Website</span>
       </a>
     </nav>
 
     <div class="sidebar-footer">
-      <button class="nav-item" id="logout-btn" style="color:var(--red);">
-        <span class="nav-icon">🚪</span>
-        Logout
+      <button class="nav-item logout-item" id="logout-btn">
+        <span>Logout</span>
       </button>
     </div>
   </aside>
@@ -52,11 +50,15 @@
 
     <!-- Topbar -->
     <div class="topbar">
-      <div class="topbar-title">Rooms Management</div>
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbar-title">Rooms Management</div>
+        <div class="topbar-sub" id="topbar-sub">Manage your property listings</div>
+      </div>
       <div class="topbar-right">
         <div class="topbar-user">
-          <span class="user-dot"></span>
+          <span class="user-avatar">A</span>
           <span>admin</span>
+          <span class="user-dot"></span>
         </div>
         <button class="btn btn-gold" onclick="openAddModal()" id="add-room-btn">
           + Add Room
@@ -70,60 +72,135 @@
       <!-- Stats Row -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-icon">🛏️</div>
+          <div class="stat-icon stat-icon-rooms"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z"/><path d="M3 13l1.5-5.5A2 2 0 016.4 6h11.2a2 2 0 011.9 1.5L21 13"/></svg></div>
           <div class="stat-info">
             <span class="stat-num" id="stat-total">—</span>
             <span class="stat-lbl">Total Rooms</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">✅</div>
+          <div class="stat-icon stat-icon-avail"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="stat-info">
             <span class="stat-num" id="stat-available">—</span>
             <span class="stat-lbl">Available</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">🚫</div>
+          <div class="stat-icon stat-icon-unavail"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
           <div class="stat-info">
             <span class="stat-num" id="stat-unavailable">—</span>
             <span class="stat-lbl">Unavailable</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon">📱</div>
+          <div class="stat-icon stat-icon-gallery"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
           <div class="stat-info">
-            <span class="stat-num">WA</span>
-            <span class="stat-lbl">Bookings via WhatsApp</span>
+            <span class="stat-num" id="stat-gallery">—</span>
+            <span class="stat-lbl">Gallery Photos</span>
           </div>
         </div>
       </div>
 
-      <!-- Rooms Table Panel -->
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">All Rooms</span>
+      <!-- ═══════════ ROOMS SECTION ═══════════ -->
+      <div id="rooms-section">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="panel-title">All Rooms</span>
+              <span class="panel-subtitle">Click Edit to modify details or toggle availability</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="rooms-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Room Name</th>
+                  <th>Price/Night</th>
+                  <th>Amenities</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="rooms-table-body">
+                <tr>
+                  <td colspan="6" style="text-align:center;padding:40px;color:var(--muted);">
+                    <span class="spinner" style="display:inline-block;margin:0 auto;"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="table-wrap">
-          <table id="rooms-table">
-            <thead>
-              <tr>
-                <th>Photo</th>
-                <th>Room Name</th>
-                <th>Price/Night</th>
-                <th>Amenities</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="rooms-table-body">
-              <tr>
-                <td colspan="6" style="text-align:center;padding:40px;color:var(--muted);">
-                  <span class="spinner" style="display:inline-block;margin:0 auto;"></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      </div>
+
+      <!-- ═══════════ GALLERY SECTION ═══════════ -->
+      <div id="gallery-section" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="panel-title">Photo Gallery</span>
+              <span class="panel-subtitle">These photos appear in the public gallery section of your website</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <!-- Upload Zone -->
+            <div class="gallery-upload-zone" id="gallery-upload-zone">
+              <input type="file" id="gallery-file-input" accept="image/*" multiple />
+              <div class="guz-content">
+                <span class="guz-icon">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </span>
+                <span class="guz-title">Upload Gallery Photos</span>
+                <span class="guz-sub">Drag & drop or click to select · JPG, PNG, WebP, GIF</span>
+              </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gal-admin-grid" id="gallery-grid">
+              <div class="gallery-empty-state">
+                <p>No gallery photos yet</p>
+                <span>Upload photos to showcase in the public gallery section</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SETTINGS SECTION ═══════════ -->
+      <div id="settings-section" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="panel-title">Contact Settings</span>
+              <span class="panel-subtitle">Update your WhatsApp number and Instagram handle used across the website</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="settings-form">
+              <div class="settings-group">
+                <label for="setting-whatsapp">WhatsApp Number</label>
+                <div class="settings-input-row">
+                  <span class="settings-prefix">+</span>
+                  <input type="text" id="setting-whatsapp" placeholder="e.g. 918800105244 (country code + number, no spaces)" />
+                </div>
+                <span class="settings-hint">Include country code without + symbol. Example: 918800105244</span>
+              </div>
+              <div class="settings-group">
+                <label for="setting-instagram">Instagram Handle</label>
+                <div class="settings-input-row">
+                  <span class="settings-prefix">@</span>
+                  <input type="text" id="setting-instagram" placeholder="e.g. midnightatelier.gn" />
+                </div>
+                <span class="settings-hint">Just the username, without the @ symbol</span>
+              </div>
+              <button class="btn btn-gold" id="save-settings-btn" style="margin-top:16px;">Save Settings</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -143,77 +220,56 @@
       <form id="room-form" autocomplete="off">
         <div class="form-grid">
 
-          <!-- Name -->
           <div class="form-group full">
             <label for="room-name">Room Name *</label>
             <input type="text" id="room-name" placeholder="e.g. The Midnight Suite" required />
           </div>
 
-          <!-- Description -->
           <div class="form-group full">
             <label for="room-desc">Description</label>
             <textarea id="room-desc" placeholder="Describe the room vibe, features, and what makes it special..."></textarea>
           </div>
 
-          <!-- Price -->
           <div class="form-group">
             <label for="room-price">Price per Night (₹)</label>
             <input type="number" id="room-price" placeholder="e.g. 2999" min="0" step="1" />
           </div>
 
-          <!-- Availability -->
           <div class="form-group">
             <label for="room-available">Availability</label>
             <select id="room-available">
-              <option value="1">✅ Available</option>
-              <option value="0">🚫 Unavailable</option>
+              <option value="1">Available</option>
+              <option value="0">Unavailable</option>
             </select>
           </div>
 
-          <!-- Amenities -->
           <div class="form-group full">
             <label for="room-amenities">Amenities</label>
-            <input
-              type="text"
-              id="room-amenities"
-              placeholder="e.g. AC, WiFi, Jacuzzi, Projector, Smart TV (comma-separated)"
-            />
+            <input type="text" id="room-amenities" placeholder="e.g. AC, WiFi, Jacuzzi, Projector, Smart TV (comma-separated)" />
           </div>
 
-          <!-- Images -->
           <div class="form-group full">
             <label>Room Images</label>
-
-            <!-- Tab Toggle -->
             <div class="img-input-tabs">
-              <button type="button" class="img-tab active" data-tab="url">🔗 Add by URL</button>
-              <button type="button" class="img-tab" data-tab="upload">📁 Upload File</button>
+              <button type="button" class="img-tab active" data-tab="url">Add by URL</button>
+              <button type="button" class="img-tab" data-tab="upload">Upload File</button>
             </div>
-
-            <!-- URL pane -->
             <div class="img-pane active" data-pane="url">
               <div style="display:flex;gap:10px;align-items:flex-end;">
                 <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
                   <label for="room-img-url" style="margin:0;">Image URL</label>
                   <input type="url" id="room-img-url" placeholder="https://example.com/room-photo.jpg" />
                 </div>
-                <button type="button" class="btn btn-outline" id="add-url-btn" style="flex-shrink:0;white-space:nowrap;">
-                  + Add URL
-                </button>
+                <button type="button" class="btn btn-outline" id="add-url-btn" style="flex-shrink:0;white-space:nowrap;">+ Add URL</button>
               </div>
             </div>
-
-            <!-- Upload pane -->
             <div class="img-pane" data-pane="upload">
               <div class="upload-drop-zone">
                 <input type="file" id="file-input" accept="image/*" multiple />
-                <span class="dz-icon">📸</span>
                 <div class="dz-text">Click to select or drag & drop images</div>
                 <div class="dz-sub">JPG, PNG, WebP, GIF supported</div>
               </div>
             </div>
-
-            <!-- Preview list -->
             <div class="img-preview-list" id="img-preview-list">
               <p style="color:var(--muted);font-size:0.8rem;">No images added yet</p>
             </div>
@@ -225,7 +281,7 @@
 
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('room-modal')">Cancel</button>
-      <button class="btn btn-gold" id="save-room-btn">💾 Save Room</button>
+      <button class="btn btn-gold" id="save-room-btn">Save Room</button>
     </div>
   </div>
 </div>
@@ -246,11 +302,11 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('confirm-modal')">Cancel</button>
-      <button class="btn btn-danger" id="confirm-delete-btn">🗑️ Yes, Delete</button>
+      <button class="btn btn-danger" id="confirm-delete-btn">Yes, Delete</button>
     </div>
   </div>
 </div>
 
-<script src="../js/admin.js"></script>
+<script src="../js/admin.js?v=20260911"></script>
 </body>
 </html>

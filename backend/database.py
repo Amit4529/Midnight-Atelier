@@ -27,6 +27,23 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 """
 
+CREATE_GALLERY_TABLE = """
+CREATE TABLE IF NOT EXISTS gallery_images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image_url TEXT NOT NULL,
+    caption TEXT DEFAULT '',
+    display_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+"""
+
+CREATE_SETTINGS_TABLE = """
+CREATE TABLE IF NOT EXISTS settings (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+);
+"""
+
 
 async def get_db():
     async with aiosqlite.connect(DB_PATH) as db:
@@ -38,6 +55,8 @@ async def init_db():
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute(CREATE_ROOMS_TABLE)
         await db.execute(CREATE_ADMIN_TABLE)
+        await db.execute(CREATE_GALLERY_TABLE)
+        await db.execute(CREATE_SETTINGS_TABLE)
 
         # Seed default admin if not exists
         cursor = await db.execute("SELECT id FROM admins WHERE username = ?", ("admin",))
@@ -48,6 +67,16 @@ async def init_db():
                 "INSERT INTO admins (username, hashed_password) VALUES (?, ?)",
                 ("admin", hashed),
             )
+
+        # Seed default settings
+        default_settings = {
+            "whatsapp_number": "918800105244",
+            "instagram_handle": "midnightatelier.gn",
+        }
+        for key, value in default_settings.items():
+            cursor = await db.execute("SELECT key FROM settings WHERE key = ?", (key,))
+            if not await cursor.fetchone():
+                await db.execute("INSERT INTO settings (key, value) VALUES (?, ?)", (key, value))
 
         # Seed sample rooms
         cursor = await db.execute("SELECT COUNT(*) FROM rooms")
@@ -93,3 +122,4 @@ async def init_db():
             )
 
         await db.commit()
+

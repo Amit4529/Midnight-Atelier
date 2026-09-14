@@ -30,16 +30,6 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 ---
 
-## 🔐 Admin Credentials
-
-| Field    | Value          |
-|----------|----------------|
-| URL      | `/admin/`      |
-| Username | `admin`        |
-| Password | `midnight2024` |
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -67,15 +57,6 @@ MIdnight Atelier/
         ├── index.html   # Admin login page
         └── dashboard.html # Admin dashboard
 ```
-
----
-
-## 📱 WhatsApp
-
-- **Primary**: [+91 88001 05244](https://wa.me/918800105244)
-- **Secondary**: +91 89697 16944
-
----
 
 ## 🛠️ Tech Stack
 
